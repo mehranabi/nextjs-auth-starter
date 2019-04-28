@@ -19,13 +19,13 @@ const styles = theme => ({
 })
 
 const validationSchema = object().shape({
-  phone: string()
-    .required('!ضروری')
-    .length(11, '!شماره موبایل را 11 رقمی وارد کنید'),
+  email: string()
+    .required('Required!')
+    .email('Please provide a valid email address!'),
   password: string()
-    .required('ضروری!')
-    .min(6, 'حداقل 6 کاراکتر!')
-    .max(36, 'حداکثر 36 کاراکتر!'),
+    .required('Required!')
+    .min(6, 'Please provide at least 6 characters!')
+    .max(50, 'Please provide at most 50 characters!'),
 })
 
 class LoginForm extends Component {
@@ -35,7 +35,7 @@ class LoginForm extends Component {
     return (
       <div className={classes.root}>
         <Formik
-          initialValues={{ phone: '', password: '' }}
+          initialValues={{ email: '', password: '' }}
           onSubmit={this.props.onSubmit}
           validationSchema={validationSchema}
           render={({ isSubmitting, handleSubmit }) => (
@@ -43,13 +43,12 @@ class LoginForm extends Component {
               <Grid container spacing={16}>
                 <Grid item xs={6}>
                   <Field
-                    type="tel"
-                    name="phone"
-                    label="شماره موبایل"
+                    type="email"
+                    name="email"
+                    label="E-Mail Address"
                     component={TextField}
                     fullWidth
                     variant="filled"
-                    dir="ltr"
                     required
                   />
                 </Grid>
@@ -57,7 +56,7 @@ class LoginForm extends Component {
                   <Field
                     type="password"
                     name="password"
-                    label="رمزعبور"
+                    label="Password"
                     component={TextField}
                     fullWidth
                     variant="filled"
@@ -76,7 +75,7 @@ class LoginForm extends Component {
                     onClick={handleSubmit}
                     disabled={isSubmitting}
                   >
-                    ورود
+                    SignIn
                   </Button>
                 </Grid>
               </Grid>

@@ -17,7 +17,7 @@ class Index extends Component {
     const { classes, auth } = this.props
 
     return (
-      <Layout profile={auth.profile} route="/">
+      <Layout profile={auth.profile} route="/" title="Dashboard">
         <Head>
           <title>خانه | Trade Room</title>
         </Head>

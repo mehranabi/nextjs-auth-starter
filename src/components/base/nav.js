@@ -17,8 +17,16 @@ import Popover from '@material-ui/core/Popover'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/MenuRounded'
-import ChevronRightIcon from '@material-ui/icons/ChevronRightRounded'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeftRounded'
 import HomeIcon from '@material-ui/icons/HomeRounded'
+import FeedIcon from '@material-ui/icons/RssFeedRounded'
+import SearchIcon from '@material-ui/icons/SearchRounded'
+import ListIcon from '@material-ui/icons/ListRounded'
+import GroupIcon from '@material-ui/icons/GroupRounded'
+import TodayIcon from '@material-ui/icons/TodayRounded'
+import SupportIcon from '@material-ui/icons/ContactSupportRounded'
+import SettingsIcon from '@material-ui/icons/SettingsRounded'
+import PieChartIcon from '@material-ui/icons/PieChartRounded'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import AccountIcon from '@material-ui/icons/AccountCircleOutlined'
 import Link from 'next/link'
@@ -82,34 +90,30 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
   drawerMenu: {
-    /*backgroundColor: Colors.menu,
-    '& *': {
-      color: Colors.menuItem,
-    },*/
     height: '100%',
+    backgroundColor: theme.palette.drawer,
   },
   theDrawer: {
     height: '100%',
   },
   drawerMenuItemIcon: {
     paddingLeft: theme.spacing.unit,
+    color: 'white',
+  },
+  drawerMenuItemText: {
+    color: 'white',
   },
   profileContainer: {
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit,
+    padding: theme.spacing.unit,
     minWidth: 300,
   },
   profileAvatar: {
     height: 70,
     width: 70,
+    padding: theme.spacing.unit * 2,
   },
   clickableText: {
     cursor: 'pointer',
-  },
-  textIcon: {
-    marginLeft: theme.spacing.unit,
   },
   profileDivider: {
     marginTop: theme.spacing.unit,
@@ -119,9 +123,51 @@ const styles = theme => ({
 
 const menuItems = [
   {
-    title: 'خانه',
+    title: 'Dashboard',
     icon: <HomeIcon />,
     route: '/',
+    prefetch: false,
+  },
+  {
+    title: 'Feed',
+    icon: <FeedIcon />,
+    route: '/feed',
+    prefetch: false,
+  },
+  {
+    title: 'Contacts',
+    icon: <GroupIcon />,
+    route: '/contacts',
+    prefetch: false,
+  },
+  {
+    title: 'Tasks',
+    icon: <ListIcon />,
+    route: '/tasks',
+    prefetch: false,
+  },
+  {
+    title: 'Calendar',
+    icon: <TodayIcon />,
+    route: '/calendar',
+    prefetch: false,
+  },
+  {
+    title: 'Support',
+    icon: <SupportIcon />,
+    route: '/support',
+    prefetch: false,
+  },
+  {
+    title: 'Settings',
+    icon: <SettingsIcon />,
+    route: '/settings',
+    prefetch: false,
+  },
+  {
+    title: 'Information',
+    icon: <PieChartIcon />,
+    route: '/information',
     prefetch: false,
   },
 ]
@@ -167,18 +213,16 @@ class Nav extends Component {
 
     const menu = menuItems.map((item, index) => {
       const isSelected = item.route === route
-      if (isSelected === true && this.state.routeIndex !== index) {
-        this.setState({
-          routeIndex: index,
-        })
-      }
       return (
         <Link prefetch={item.prefetch} href={item.route} key={item.title}>
           <ListItem selected={isSelected} button>
             <ListItemIcon className={classes.drawerMenuItemIcon}>
               <Tooltip title={item.title}>{item.icon}</Tooltip>
             </ListItemIcon>
-            <ListItemText primary={item.title} />
+            <ListItemText
+              primaryTypographyProps={{ className: classes.drawerMenuItemText }}
+              primary={item.title}
+            />
           </ListItem>
         </Link>
       )
@@ -207,12 +251,15 @@ class Nav extends Component {
                   spacing={40}
                 >
                   <Grid item>
-                    <img alt="Trade Roon" src="/static/images/logo.png" />
+                    <img
+                      alt="SuperStar CRM"
+                      src="/static/images/superstar-logo.png"
+                    />
                   </Grid>
                   <Grid item>
                     <Grid container direction="row" alignItems="center">
                       <Grid item>
-                        <Tooltip title="باز کردن منو">
+                        <Tooltip title="Open Drawer">
                           <IconButton
                             color="inherit"
                             aria-label="Expand Menu"
@@ -240,7 +287,7 @@ class Nav extends Component {
                 </Grid>
               </Grid>
               <Grid item>
-                <Tooltip title="پروفایل">
+                <Tooltip title="Profile">
                   <IconButton
                     color="inherit"
                     className={classes.avatar}
@@ -269,18 +316,18 @@ class Nav extends Component {
             horizontal: 'right',
           }}
         >
-          <div className={classes.qaContainer}>
+          <div className={classes.profileContainer}>
             <Grid container direction="row" spacing={32} alignItems="center">
               <Grid item>
                 <Avatar
-                  alt="Emily Roberts"
-                  src="/static/images/avatar.jpg"
-                  className={classes.qaAvatar}
+                  alt={profile.name}
+                  src={profile.avatar}
+                  className={classes.profileAvatar}
                 />
               </Grid>
               <Grid item xs>
                 <Typography noWrap align="center" variant="h6" gutterBottom>
-                  Emily Johnson
+                  {profile.name}
                 </Typography>
                 <Grid
                   container
@@ -306,7 +353,7 @@ class Nav extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider className={classes.qaDivider} />
+            <Divider className={classes.profileDivider} />
             <Grid container alignItems="center" justify="space-between">
               <Grid item>
                 <Link href="/profile/settings">
@@ -315,7 +362,7 @@ class Nav extends Component {
               </Grid>
               <Grid item>
                 <Link href="/auth/logout">
-                  <Button color="inherit">Log Out</Button>
+                  <Button color="inherit">SignOut</Button>
                 </Link>
               </Grid>
             </Grid>
@@ -332,9 +379,9 @@ class Nav extends Component {
           open={this.state.expandMenu}
         >
           <div className={classes.toolbarIcon}>
-            <Tooltip title="بستن منو">
+            <Tooltip title="Close Drawer">
               <IconButton onClick={this.handleCloseDrawer}>
-                <ChevronRightIcon />
+                <ChevronLeftIcon />
               </IconButton>
             </Tooltip>
           </div>

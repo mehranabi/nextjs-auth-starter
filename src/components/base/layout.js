@@ -17,11 +17,11 @@ const styles = theme => ({
 
 class Layout extends Component {
   render() {
-    const { classes, route, profile, children } = this.props
+    const { classes, route, profile, children, title } = this.props
 
     return (
       <div className={classes.root}>
-        <Nav profile={profile} route={route} />
+        <Nav profile={profile} route={route} title={title} />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {children}

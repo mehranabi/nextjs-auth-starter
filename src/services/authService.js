@@ -5,7 +5,7 @@ export default class AuthService {
   }
 
   setToken = token => {
-    localStorage.setItem('token', jwt)
+    localStorage.setItem('token', token)
   }
 
   removeToken = () => {

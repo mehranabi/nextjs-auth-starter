@@ -1,0 +1,54 @@
+{
+  "name": "superstar-nextjs",
+  "version": "1.0.0",
+  "description": "SuperStar CRM web Application built with Next.js based on React.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Mehran Abghari",
+    "email": "mehran.ab80@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehranabi/superstar-nextjs-v2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mehranabi/superstar-nextjs-v2/issues"
+  },
+  "homepage": "https://github.com/mehranabi/superstar-nextjs-v2#readme",
+  "keywords": [
+    "SuperStar",
+    "CRM",
+    "SuperStar CRM",
+    "SuperStar Corp",
+    "Real Estate",
+    "RealEstate"
+  ],
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "analyze": "cross-env ANALYZE=1 next build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "@zeit/next-css": "^1.0.1",
+    "formik": "^1.5.4",
+    "formik-material-ui": "^0.0.16",
+    "jss": "^9.8.7",
+    "next": "^8.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-jss": "^8.6.1",
+    "url-loader": "^1.1.2",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.7.1",
+    "webpack-bundle-analyzer": "^3.3.2"
+  }
+}
